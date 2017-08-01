@@ -60,4 +60,11 @@ public class Execute {
 		log.info(property + " is  set with value: " + value);
 	}
 
+	public static String getMessage(String propertyName) {
+		ExcelUtil util = new ExcelUtil();
+		String message = null;
+		message = util.getMessage(propertyName);
+		return message;
+	}
+
 }

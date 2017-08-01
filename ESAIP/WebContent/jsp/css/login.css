@@ -1,5 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+.header img {
+	padding-top: 15px;
+	float: left;
+	width: 120px;
+	height: 22px;
+}
+
+.header h1 {
+	display: inline-block;
+	top: 3px;
+	font-size: 22px;
+	padding-left: 350px;
+	color: #D12752;
+}
+
 .login-page {
 	width: 360px;
 	padding: 8% 0 0;
@@ -34,7 +49,7 @@
 .password {
 	font-family: "Roboto", sans-serif;
 	outline: 0;
-	background: #f2f2f2;
+	background: #d5d5d5;
 	width: 100%;
 	border: 0;
 	margin: 0 0 15px;
@@ -48,7 +63,7 @@
 	font-family: "Roboto", sans-serif;
 	text-transform: uppercase;
 	outline: 0;
-	background: darkcyan;
+	background: #3c8dbc;
 	width: 100%;
 	border: 0;
 	padding: 15px;
@@ -97,14 +112,6 @@
 	text-align: center;
 }
 
-.container .info h1 {
-	margin: 0 0 15px;
-	padding: 0;
-	font-size: 36px;
-	font-weight: 300;
-	color: #1a1a1a;
-}
-
 .container .info span {
 	color: #4d4d4d;
 	font-size: 12px;
@@ -130,6 +137,7 @@ body {
 
 input[type=text] {
 	border-style: hidden;
+	background-color: #d5d5d5;
 }
 
 select {

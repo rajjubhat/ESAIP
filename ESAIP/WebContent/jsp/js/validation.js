@@ -41,3 +41,6 @@ function showButton() {
 	}
 	document.getElementById("div1").style.display = vis;
 }
+function loadFirstField() {
+	document.getElementById("emailid").focus();
+}

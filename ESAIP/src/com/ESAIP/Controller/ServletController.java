@@ -120,7 +120,7 @@ public class ServletController extends HttpServlet {
 			request.getSession().setAttribute("executiondata", FetchData.fetchExcecutionPlan(fileLocation));
 			request.getSession().setAttribute("runplans", FetchData.getFilesList("runplans"));
 			request.getSession().setAttribute("newnode", Execute.getProperty("DownloadNewNodeserver"));
-			request.getSession().setAttribute("version", Execute.getProperty("NodeServerVersion"));
+			request.getSession().setAttribute("version", Execute.getProperty("LatestNoderserverVersion"));
 			response.sendRedirect("execute.jsp");
 		}
 
@@ -139,11 +139,11 @@ public class ServletController extends HttpServlet {
 			String baseLocation = util.getFolderLocation();
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			String filename = Execute.getProperty("NodeServerVersion") + ".exe";
+			String fileName = Execute.getProperty("LatestNoderserverVersion") + ".exe";
 			String filepath = baseLocation + "\\src\\Repository\\resources\\";
 			response.setContentType("APPLICATION/OCTET-STREAM");
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-			FileInputStream fileInputStream = new FileInputStream(filepath + filename);
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+			FileInputStream fileInputStream = new FileInputStream(filepath + fileName);
 			int i;
 			while ((i = fileInputStream.read()) != -1) {
 				out.write(i);
@@ -157,9 +157,12 @@ public class ServletController extends HttpServlet {
 			String fileLocation = request.getParameter("filelocation");
 			String fileName = fileLocation.substring(fileLocation.lastIndexOf("\\") + 1);
 			Execute.updateProperty("RunplanFilename", fileName);
-			Execute.updateProperty("NodeServerRunning", "Yes");
+			Execute.updateProperty("NodeServerRunning", "");
 			Execute.updateProperty("ProgressStatus", "0");
 			Execute.updateProperty("StopExecution", "No");
+			Execute.updateProperty("ResultFilename", "");
+			Execute.updateProperty("NodeServerRunningMessage", "");
+			Execute.updateProperty("StopExecutionMessage", "");
 			Execute.executeTestCase(fileLocation);
 			response.sendRedirect("process.do");
 		}
@@ -169,12 +172,14 @@ public class ServletController extends HttpServlet {
 			request.getSession().setAttribute("resultList", FetchData.getFilesList("results"));
 			response.sendRedirect("result.jsp");
 		}
-		/* This is used to update the progress of the test case execution*/
+		/* This is used to update the progress of the test case execution */
 		if (uri.contains("process.do")) {
 			request.getSession().setAttribute("resultstatus", Execute.getProperty("ProgressStatus"));
 			request.getSession().setAttribute("nodeStatus", Execute.getProperty("NodeServerRunning"));
 			request.getSession().setAttribute("stopStatus", Execute.getProperty("StopExecution"));
-			request.getSession().setAttribute("testCase", Execute.getProperty("StopExecutionMessage"));
+			request.getSession().setAttribute("stopMessage", Execute.getProperty("StopExecutionMessage"));
+			String nodeMessage = Execute.getProperty("NodeServerRunningMessage");
+			request.getSession().setAttribute("nodeMessage", Execute.getMessage(nodeMessage));
 			request.getSession().setAttribute("runplan", FetchData.runPLanLocation());
 			request.getSession().setAttribute("resultfile", FetchData.resultFileLocation());
 			response.sendRedirect("executionprogress.jsp");
@@ -213,7 +218,7 @@ public class ServletController extends HttpServlet {
 			out.close();
 		}
 
-		/* This is used to stop the execution of selenium testing */
+		/* This is used to stop the execution */
 		if (uri.contains("stop.do")) {
 			Execute.updateProperty("StopExecution", "Yes");
 		}
@@ -234,10 +239,7 @@ public class ServletController extends HttpServlet {
 			request.getSession().setAttribute("defectFiles", FetchData.getFilesList("results"));
 			response.sendRedirect("defects.jsp");
 		}
-		/* This is used to stop the execution of Defect logging */
-		if (uri.contains("close.do")) {
-			Execute.updateProperty("StopExecution", "Yes");
-		}
+		
 		/*
 		 * This is used fetch the defects details All the column numbers are n-1
 		 * as of sheet in excel column 10 is log defect column 11 is
@@ -282,14 +284,16 @@ public class ServletController extends HttpServlet {
 				defect.setStepsToReproduce(request.getParameter("stepsToReproduce" + i));
 				defect.setAdditionalInformation(request.getParameter("additionalInformation" + i));
 				defect.setUploadFilePath(request.getParameter("uploadFilePath" + i));
-				defect.setDefectUrl(request.getParameter("url" + i));
+				defect.setDefectUrl(request.getParameter("defecturl" + i));
 				defect.setDefectID(request.getParameter("defectID" + i));
+				defect.setLoggedDate(request.getParameter("loggeddate" + i));
 				defects.add(defect);
 			}
 			UpdateData.updateDefects(defects, fileLocation);
 			Execute.updateProperty("DefectFilename", fileName);
 			Execute.updateProperty("DefectProgressStatus", "0");
 			Execute.updateProperty("StopExecution", "No");
+			Execute.updateProperty("DefectProgressMessage", "");
 			Execute.logDefect(fileLocation);
 			response.sendRedirect("progress.do");
 		}
@@ -317,8 +321,9 @@ public class ServletController extends HttpServlet {
 				defect.setStepsToReproduce(request.getParameter("stepsToReproduce" + i));
 				defect.setAdditionalInformation(request.getParameter("additionalInformation" + i));
 				defect.setUploadFilePath(request.getParameter("uploadFilePath" + i));
-				defect.setDefectUrl(request.getParameter("url" + i));
+				defect.setDefectUrl(request.getParameter("defecturl" + i));
 				defect.setDefectID(request.getParameter("defectID" + i));
+				defect.setLoggedDate(request.getParameter("loggeddate" + i));
 				defects.add(defect);
 			}
 			UpdateData.updateDefects(defects, fileLocation);
@@ -329,8 +334,8 @@ public class ServletController extends HttpServlet {
 		if (uri.contains("progress.do")) {
 			request.getSession().setAttribute("defectstatus", Execute.getProperty("DefectProgressStatus"));
 			request.getSession().setAttribute("stopExecution", Execute.getProperty("StopExecution"));
-			request.getSession().setAttribute("defectmessage", Execute.getProperty("DefectProgressMessage"));
-			request.getSession().setAttribute("defectname", Execute.getProperty("StopExecutionMessage"));
+			String defectProgressMessage = Execute.getProperty("DefectProgressMessage");
+			request.getSession().setAttribute("defectmessage", Execute.getMessage(defectProgressMessage));
 			request.getSession().setAttribute("defectfile", FetchData.defectFileLocation());
 			response.sendRedirect("defectprogress.jsp");
 		}

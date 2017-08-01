@@ -38,8 +38,7 @@ public class ExcelUtil {
 			prop = new Properties();
 			prop.load(fis);
 			fis.close();
-			FileOutputStream fos = new FileOutputStream(
-					"D:\\ProjectGenericAutomation\\src\\Progress\\Progress.properties");
+			FileOutputStream fos = new FileOutputStream(baseLocation + "\\src\\Progress\\Progress.properties");
 			prop.setProperty(property, value);
 			prop.store(fos, null);
 		} catch (IOException e) {
@@ -55,6 +54,20 @@ public class ExcelUtil {
 		prop = new Properties();
 		try {
 			prop.load(new FileInputStream(baseLocation + "\\src\\Progress\\Progress.properties"));
+		} catch (IOException e) {
+			log.error("Error fetching the properties file: " + e);
+		}
+		return prop.getProperty(propertyName);
+	}
+
+	/* This is used to fetch the values set by selenium testing */
+	public String getMessage(String propertyName) {
+		ExcelUtil util = new ExcelUtil();
+		String baseLocation = util.getFolderLocation();
+		Properties prop = null;
+		prop = new Properties();
+		try {
+			prop.load(new FileInputStream(baseLocation + "\\src\\Progress\\Messages.properties"));
 		} catch (IOException e) {
 			log.error("Error fetching the properties file: " + e);
 		}

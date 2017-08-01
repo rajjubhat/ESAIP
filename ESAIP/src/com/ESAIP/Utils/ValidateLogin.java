@@ -1,6 +1,5 @@
 package com.ESAIP.Utils;
 
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,12 +10,12 @@ public class ValidateLogin {
 	private static final Logger log = Logger.getLogger(ValidateLogin.class);
 	/* This method is used to validate the user credentials from database values*/
 	public static boolean validate(String email, String password) {
-		String encryptedPassword = EncryptData(password);
-		boolean status = verifyUser(email, encryptedPassword);
+		//String encryptedPassword = EncryptData(password);
+		boolean status = verifyUser(email, password);
 		return status;
 	}
 	/*This is used to encrypt the data using SHA Algorithm */
-	private static String EncryptData(String password) {
+	/*private static String EncryptData(String password) {
 		String algorithm = "SHA";
 		byte[] passwordInBytes = password.getBytes();
 
@@ -42,7 +41,7 @@ public class ValidateLogin {
 		}
 		String encPassword = builder.toString();
 		return encPassword;
-	}
+	}*/
 	/*This is used to check the values passed with the values in the database*/
 	private static boolean verifyUser(String emailId, String encPassword) {
 		boolean status = false;

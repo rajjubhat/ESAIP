@@ -7,10 +7,9 @@
 <link rel="shortcut icon" href="jsp/images/index.png" type="image/png" />
 <title>Login Form</title>
 <link rel="stylesheet" href="jsp/css/login.css">
-<link rel="stylesheet" href="jsp/css/base.css" />
 <script type="text/javascript" src="jsp/js/validation.js"></script>
 </head>
-<body>
+<body onload="loadFirstField();">
 	<div class="header">
 		<img src="jsp/images/estuate-inc-logo.png" alt="logo" />
 		<h1>Estuate Strategic Automation Tool</h1>

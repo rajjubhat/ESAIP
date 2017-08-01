@@ -203,8 +203,11 @@ public class UpdateData {
 
 		cell = row.createCell(13);
 		cell.setCellValue(defect.getDefectID());
-		
+
 		cell = row.createCell(14);
 		cell.setCellValue(defect.getLoggedDate());
+
+		cell = row.createCell(15);
+		cell.setCellValue(defect.getDefectUrl());
 	}
 }

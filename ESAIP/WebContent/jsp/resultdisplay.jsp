@@ -1,76 +1,292 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
-<!-- This page is used to display the result details with progress bar-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<title>ESAIP|Results</title>
 <link rel="shortcut icon" href="images/index.png" type="image/png" />
-<title>Results</title>
-<link rel="stylesheet" type="text/css" href="css/base.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="css/dataTables.bootstrap.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="css/_all-skins.min.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 <script type="text/javascript" src="js/dropdown.js"></script>
-<style type="text/css">
-.floatLeft {
-	width: 500px;
-	float: left;
-	padding-left: 10px;
-}
-
-.floatRight {
-	width: 40%;
-	float: right;
-	overflow: hidden;
-}
-
-.container {
-	overflow: hidden;
-}
-
-.runtable {
-	height: 110px;
-	width: 1100px;
-	overflow: auto;
-	border: 0.5px solid #167f92;
-}
-</style>
-<script type="text/javascript">
-	window.onload = function() {
-		var pass = parseInt(document.form2.pass.value);
-		var fail = parseInt(document.form2.fail.value);
-		var norun = parseInt(document.form2.noRun.value);
-		var chart = new CanvasJS.Chart("chartContainer", {
-			legend : {
-				maxWidth : 350,
-				itemWidth : 120
-			},
-			data : [ {
-				type : "pie",
-				showInLegend : true,
-				toolTipContent : "{y} - #percent %",
-				legendText : "{Label}",
-				dataPoints : [ {
-					y : pass,
-					color : "Green",
-					Label : "Pass"
-				}, {
-					y : fail,
-					color : "Red",
-					Label : "Fail"
-				}, {
-					y : norun,
-					color : "Grey",
-					Label : "No Run"
-				} ]
-			} ]
-		});
-		chart.render();
-	}
-</script>
-<script type="text/javascript" src="js/canvasjs.min.js"></script>
 </head>
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+
+		<header class="main-header">
+			<!-- Logo -->
+			<a href="fetch.do" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><img src="images/index.png"
+					alt="logo" /></span> <!-- logo for regular state and mobile devices --> <span
+				class="logo-lg"><img src="images/estuate-inc-logo.png"
+					alt="logo" /></span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top">
+				<!-- Sidebar toggle button-->
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+					role="button"> <span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+				</a> <a href=""
+					style="text-align: center; font-size: 30px; color: white; padding-left: 300px;">
+					Estuate Strategic Automation Tool </a>
+				<div class="navbar-custom-menu" style="margin-right: 10px;">
+					<ul class="nav navbar-nav">
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown user user-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> <img
+								src="images/avatar5.png" class="user-image" alt="User Image">
+								<!--<span class="hidden-xs">User</span>-->
+						</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+								<li class="user-header"><img src="images/avatar5.png"
+									class="img-circle" alt="User Image">
+									<p>
+										User
+										<!--  	 <small>Member since
+											Nov. 2012</small>-->
+									</p></li>
+								<!-- Menu Body -->
+								<!--<li class="user-body">
+									<div class="row">
+									</div> 
+								</li>-->
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<!--  <div class="pull-left">
+										<a href="#" class="btn btn-default btn-flat">Profile</a>
+									</div>--> <!--  <div class="pull-right">--> <!--  <div class="pull-right">-->
+									<div style="text-align: center;">
+										<a href="logout.do" class="btn btn-default btn-flat">Log
+											out</a>
+									</div>
+								</li>
+							</ul></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar">
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+				<!-- sidebar menu: : style can be found in sidebar.less -->
+				<ul class="sidebar-menu">
+					<li class="treeview"><a href="#"> <i
+							class="fa fa-dashboard"></i> <span>Testing</span> <span
+							class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+						<ul class="treeview-menu">
+							<li><a href="fetch.do"><i class="fa fa-circle-o"></i>Master
+									Plan</a></li>
+							<li><a href="runplan.do"><i class="fa fa-circle-o"></i>
+									Runplan</a></li>
+							<li><a href="filedetails.do"><i class="fa fa-circle-o"></i>Execute</a></li>
+							<li><a href="results.do"><i class="fa fa-circle-o"></i>Results</a></li>
+							<li><a href="location.do"><i class="fa fa-circle-o"></i>Defects</a></li>
+						</ul>
+				</ul>
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+		<!-- /.Left side column. contains the logo and sidebar -->
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<form action="display.do" method="Post" name="form1"
+					onsubmit="return selectResult()">
+					<table>
+						<tr>
+							<th style="padding-left: 5px;">Select other result file:</th>
+							<td><select name="filelocation">
+									<option value=""></option>
+									<c:forEach var="data" items="${resultFileList}">
+										<option value="${data.getValue()}">${data.getKey()}</option>
+									</c:forEach>
+							</select></td>
+							<td><input type="submit" value="View Results"></td>
+							<td><span id="result" style="display: none"></span></td>
+						</tr>
+					</table>
+				</form>
+				<c:if test="${UsedRunPlan.size()!=0}">
+					<font style="font-size: 20px; padding-left: 15px;">
+						${UsedRunPlan.get(0).getFileName()}</font>
+				</c:if>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<c:if test="${result.size()!=0}">
+								<div style="text-align: right; margin-right: 15px;">
+									<a
+										href="save.do?filelocation=${result.get(0).getFileLocation()}">Download
+										result file </a>|<a
+										href="logs.do?filelocation=${result.get(0).getFileLocation()}">
+										Download log file </a>
+									<c:if test="${defectsize>0}">
+							|<a
+											href="defects.do?filelocation=${result.get(0).getFileLocation()}">
+											Log Defects</a>
+									</c:if>
+								</div>
+							</c:if>
+							<!-- /.box-header -->
+							<div class="box-body" style="height: 125px; overflow-y: auto;">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>SL No</th>
+											<th>Business Requirement</th>
+											<th>Modules</th>
+											<th>Test Case Id</th>
+											<th>Test Cases</th>
+											<th>Criticality</th>
+											<th>Result</th>
+											<th>Time Taken</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="data" items="${UsedRunPlan}">
+											<tr>
+												<td>${data.getId()}</td>
+												<td>${data.getBR()}</td>
+												<td>${data.getModule()}</td>
+												<td>${data.getTestCaseId()}</td>
+												<td>${data.getTestCase()}</td>
+												<td>${data.getCriticality()}</td>
+												<td>${data.getResult()}</td>
+												<td>${data.getTimeTaken()}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+							<br/>
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+				<div class="row">
+					<div class="col-md-7">
+						<!--Status -->
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Status</h3>
+							</div>
+							<div class="box-body">
+								<div
+									style="height: 190px; overflow-y: auto; text-align: center;">
+									<table id="example1" class="table table-bordered table-striped">
+										<c:forEach var="data" items="${result}">
+											<tr>
+												<th>${data.getResultkey()}</th>
+												<td>${data.getResultvalue()}</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col (LEFT) -->
+					<div class="col-md-5">
+						<!-- Graph -->
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Graph</h3>
+							</div>
+							<div class="box-body">
+								<div class="chart" style="height: 190px; overflow: hidden;">
+									<div id="piechart" style="height: 210px; align: left"></div>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col (RIGHT) -->
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<footer class="main-footer">
+			<div class="pull-right hidden-xs">
+				<b>Version</b> 1.0
+			</div>
+			<strong>Copyright &copy; 2017 <a
+				href="https://www.estuate.com/">Estuate Inc</a>.
+			</strong> All rights reserved.
+		</footer>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery 2.2.3 -->
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- DataTables -->
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<!-- SlimScroll -->
+	<script src="js/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="js/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/app.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="js/demo.js"></script>
+	<!-- page script -->
+	<!-- <script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>  -->
 	<c:if test="${result.size()>0}">
 		<form name="form2">
 			<input type="hidden" name="pass"
@@ -80,110 +296,31 @@
 				value="${result.get(7).getResultvalue()}">
 		</form>
 	</c:if>
-	<div class="header">
-		<img src="images/estuate-inc-logo.png" alt="logo" />
-		<h1>Estuate Strategic Automation Tool</h1>
-	</div>
-	<div style="width: 100%;" align="left">
-		<ul>
-			<li><a href="fetch.do">Master Plan</a></li>
-			<li><a href="runplan.do">Run Plan</a></li>
-			<li><a href="filedetails.do">Execute</a></li>
-			<li class="active"><a href="results.do">Results</a></li>
-			<li><a href="location.do"> Defects </a></li>
-			<li class="logout"><a href="logout.do">Logout</a></li>
-		</ul>
-	</div>
-	<br />
-	<div style="background-color: white;">
-		<form action="display.do" method="Post" name="form1"
-			onsubmit="return selectResult()">
-			<table>
-				<tr>
-					<td><h2>Select other result file:</h2></td>
-					<td><select name="filelocation">
-							<option value=""></option>
-							<c:forEach var="data" items="${resultFileList}">
-								<option value="${data.getValue()}">${data.getKey()}</option>
-							</c:forEach>
-					</select></td>
-					<td><input type="submit" value="View Results"></td>
-					<td><span id="result" style="display: none"></span></td>
-				</tr>
-			</table>
-		</form>
-		<table width="1190px">
-			<tr>
-				<td><h2 style="padding-left: 10px;">${UsedRunPlan.get(0).getFileName()}</h2></td>
-				<td align="right"><a
-					href="save.do?filelocation=${result.get(0).getFileLocation()}">Download
-						result file </a>|<a
-					href="logs.do?filelocation=${result.get(0).getFileLocation()}">
-						Download log file </a> <c:if test="${defectsize>0}">
-							|<a
-							href="defects.do?filelocation=${result.get(0).getFileLocation()}">
-							Log Defects</a>
-					</c:if></td>
-			</tr>
-		</table>
-		<center>
-			<div class="runtable">
-				<table class="responstable" style="width: 99%;">
-					<tr>
-						<th class="excelHeading">SL No</th>
-						<th class="excelHeading">Business Requirement</th>
-						<th class="excelHeading">Modules</th>
-						<th class="excelHeading">Test Case Id</th>
-						<th class="excelHeading">Test Cases</th>
-						<th class="excelHeading">Criticality</th>
-						<th class="excelHeading">Result</th>
-						<th class="excelHeading">Time Taken</th>
-					</tr>
-					<c:forEach var="data" items="${UsedRunPlan}">
-						<tr>
-							<td class="excelrow">${data.getId()}</td>
-							<td class="excelrow">${data.getBR()}</td>
-							<td class="excelrow">${data.getModule()}</td>
-							<td class="excelrow">${data.getTestCaseId()}</td>
-							<td class="excelrow">${data.getTestCase()}</td>
-							<td class="excelrow">${data.getCriticality()}</td>
-							<td class="excelrow">${data.getResult()}</td>
-							<td class="excelrow">${data.getTimeTaken()}</td>
-						</tr>
-					</c:forEach>
-				</table>
-				<br />
-			</div>
-		</center>
-		<table width="100%">
-			<tr>
-				<td width="50%">
-					<center>
-						<h2>Status</h2>
-						<div
-							style="height: 240px; width: 80%; overflow: auto; border: 0.5px solid #167f92;">
-								<table class="responstable" style="width: 95%;">
-									<c:forEach var="data" items="${result}">
-										<tr>
-											<th width="40%">${data.getResultkey()}</th>
-											<td width="60%">${data.getResultvalue()}</td>
-										</tr>
-									</c:forEach>
-								</table>
-							</div>
-					</center>
-				</td>
-				<td width="50%">
-					<center>
-						<h2>Graph</h2>
-						<!-- <div id="piechart" style="width: 300x; height: 198px; align: left"></div> -->
-						<div id="chartContainer"
-							style="height: 250px; width: 75%; border: 0.5px solid #167f92;"></div>
-					</center>
-				</td>
-			</tr>
-		</table>
-		<br />
-	</div>
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+			var pass = parseInt(document.form2.pass.value);
+			var fail = parseInt(document.form2.fail.value);
+			var norun = parseInt(document.form2.noRun.value);
+			var data = google.visualization.arrayToDataTable([
+					[ 'Test Case', 'success' ], [ 'Pass', pass ],
+					[ 'Fail', fail ], [ 'No Run', norun ], ]);
+			var options = {
+				colors : [ '#2faf3c', '#ff0000', '#708090' ],
+				is3D : true,
+			};
+
+			var chart = new google.visualization.PieChart(document
+					.getElementById('piechart'));
+
+			chart.draw(data, options);
+		}
+	</script>
 </body>
 </html>

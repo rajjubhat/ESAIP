@@ -340,8 +340,11 @@ public class FetchData {
 	 */
 	public static String resultFileLocation() {
 		ExcelUtil util = new ExcelUtil();
-		String location = util.getFolderLocation() + "\\src\\Repository\\results\\"
-				+ util.getProperty("ResultFilename");
+		String resultFile = util.getProperty("ResultFilename");
+		String location = "";
+		if (resultFile.trim().length() != 0) {
+			location = util.getFolderLocation() + "\\src\\Repository\\results\\" + resultFile;
+		}
 		return location;
 	}
 
